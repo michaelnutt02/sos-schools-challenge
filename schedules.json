@@ -1,0 +1,17 @@
+{
+    "testClass1": {
+        "name": "Physics",
+        "schedule": [{
+            "day": "11/3",
+            "reading": "1.1",
+            "assignment": "none",
+            "testing": "none"
+        },
+        {
+            "day": "11/4",
+            "reading": "1.2",
+            "assignment": "none",
+            "testing": "none"
+        }]
+    }
+}
