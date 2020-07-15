@@ -1,45 +1,36 @@
 import React, { Component } from 'react';
 
-import logo from './logo.svg';
-
 import './App.css';
+
+const scheduleItems = ["day", "reading", "assignment", "testing"];
 
 class App extends Component {
   state = {
-    schedules: {
-      "testClass1": {
-      "name": "Physics",
-      "schedule": [{
-          "day": "11/3",
-          "reading": "1.1",
-          "assignment": "none",
-          "testing": "none"
-      },
-      {
-          "day": "11/4",
-          "reading": "1.2",
-          "assignment": "none",
-          "testing": "none"
-      }]
-  }},
+    schedules: {},
     post: '',
     responseToPost: '',
   };
   fetchSchedules = this.fetchSchedules();
   
   componentDidMount() {
-    // this.fetchSchedules()
-    //   .then(res => this.setState({ schedules: res}))
-    //   .catch(err => console.log(err));
+    this.fetchSchedules()
+      .then(res => this.setState({ schedules: res}))
+      .catch(err => console.log(err));
   }
   
   fetchSchedules() {
     return async () => {
-      const response = await fetch('/api/all-schedules');
+      const response = await fetch('/api/get-schedules', {
+        method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ classes: ["testClass1", "testClass3"] }),
+        });
       const body = await response.json();
       if (response.status !== 200) throw Error(body.message);
-      
-      return body.testClass1;
+      console.log(body);
+      return body;
     }
   }
   
@@ -64,29 +55,18 @@ render() {
       <div className="App">
         <header className="App-header">
           <p>
-            Edit <code>src/App.js</code> and save to reload.
+            SOS Schedule Viewer
           </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
         </header>
-        <p>{this.state.schedules.testClass1.name}</p>
-        <form onSubmit={this.handleSubmit}>
-          <p>
-            <strong>Post to Server:</strong>
-          </p>
-          <input
-            type="text"
-            value={this.state.post}
-            onChange={e => this.setState({ post: e.target.value })}
-          />
-          <button type="submit">Submit</button>
-        </form>
+        {
+            Object.keys(this.state.schedules).length === 0? "loading":
+              Object.keys(this.state.schedules).map(x=> <ul key={x}>{
+                <span>
+                    <strong>{this.state.schedules[x].name}</strong>
+                    <ul key={x}>{this.state.schedules[x].schedule.map((y,i)=> scheduleItems.map((z,j)=> <li key = {x+i+j}>{y[z]}</li>))}</ul>
+                  </span>
+                  }</ul>)
+          }
         <p>{this.state.responseToPost}</p>
       </div>
     );
