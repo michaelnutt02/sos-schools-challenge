@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import { Button, Table, Form } from 'react-bootstrap';
+import BootstrapTable from 'react-bootstrap-table-next';
 
 import './App.css';
 
-const scheduleItems = ["day", "reading", "assignment", "testing"];
+const scheduleItems = ["day", "class", "reading", "assignment", "testing"];
 
 class App extends Component {
   state = {
@@ -60,17 +62,53 @@ render() {
         </header>
         {
             Object.keys(this.state.schedules).length === 0? "loading":
-              Object.keys(this.state.schedules).map(x=> <ul key={x}>{
                 <span>
-                    <strong>{this.state.schedules[x].name}</strong>
-                    <ul key={x}>{this.state.schedules[x].schedule.map((y,i)=> scheduleItems.map((z,j)=> <li key = {x+i+j}>{y[z]}</li>))}</ul>
+                    <strong> Schedule </strong>
+                    <Table striped bordered hover size="sm">
+                      <thead>
+                        <tr>
+                          {[...scheduleItems.map((x,i) => <th key = {i}>{x}</th>),<th>?</th>]}
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {/* {this.state.schedules[x].schedule.map((y,i)=> <tr key = {x+i}>{scheduleItems.map((z,j)=><td key = {x+i+j}>{z==="class"? 
+                          this.state.schedules[x].name: y[z]}</td>)}</tr>)} */}
+                        {Object.keys(this.state.schedules).reduce((acc, next)=> 
+                          [...acc,...this.state.schedules[next].schedule.map(x=> {x.class = this.state.schedules[next].name; return x;})], [])
+                          .sort(sortMonthDayYear)
+                          .map((y,i)=> <tr key = {"x"+i}>{[...scheduleItems.map((z,j)=><td key = {"x"+i+j}>{y[z] === "none"? "":y[z]}</td>), 
+                            <Form.Check aria-label="option 1" />]}</tr>)}
+                        
+                        {/* {Object.keys(this.state.schedules).reduce((acc, next)=> [...acc,...this.state.schedules[next].schedule], [])} */}
+                      </tbody>
+                    </Table>
+                    {/* <BootstrapTable trStyle={rowStyleFormat} keyField='id' data={ Object.keys(this.state.schedules).reduce((acc, next)=> 
+                          [...acc,...this.state.schedules[next].schedule.map(x=> {x.class = this.state.schedules[next].name; return x;})], [])
+                          .sort(sortMonthDayYear) } columns={ [
+                            { dataField: 'day', text: 'day' },
+                            { dataField: 'class', text: 'class' },
+                            { dataField: 'reading', text: 'reading' },
+                            { dataField: 'assignment', text: 'assignment' },
+                            { dataField: 'testing', text: 'testing' }
+                          ] } /> */}
                   </span>
-                  }</ul>)
           }
-        <p>{this.state.responseToPost}</p>
       </div>
     );
   }
+}
+
+function sortMonthDayYear(a, b){
+  var year = a.day.split("/")[2] - b.day.split("/")[2];
+  if(year !== 0) return year;
+  var month = a.day.split("/")[1] - b.day.split("/")[1];
+  if(month !== 0) return month;
+  var day = a.day.split("/")[0] - b.day.split("/")[0];
+  return day;
+}
+
+function rowStyleFormat(row, rowIdx) {
+  return { backgroundColor: rowIdx % 2 === 0 ? 'red' : 'blue' };
 }
 
 export default App;

@@ -2,13 +2,13 @@
     "testClass1": {
         "name": "Physics",
         "schedule": [{
-            "day": "11/3",
+            "day": "11/3/2019",
             "reading": "1.1",
             "assignment": "none",
             "testing": "none"
         },
         {
-            "day": "11/4",
+            "day": "11/4/2019",
             "reading": "1.2",
             "assignment": "none",
             "testing": "none"
@@ -17,13 +17,13 @@
     "testClass2": {
         "name": "US History",
         "schedule": [{
-            "day": "11/4",
+            "day": "11/4/2019",
             "reading": "none",
             "assignment": "12.2 1-10",
             "testing": "none"
         },
         {
-            "day": "11/6",
+            "day": "11/6/2019",
             "reading": "none",
             "assignment": "none",
             "testing": "Ch 12 test"
@@ -32,13 +32,13 @@
     "testClass3": {
         "name": "Pre-Calc",
         "schedule": [{
-            "day": "11/3",
+            "day": "11/3/2019",
             "reading": "none",
             "assignment": "3.2 3-13",
             "testing": "none"
         },
         {
-            "day": "11/5",
+            "day": "11/5/2019",
             "reading": "none",
             "assignment": "3.3 2,4,8,15,19",
             "testing": "none"
