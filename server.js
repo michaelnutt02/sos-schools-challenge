@@ -1,39 +1,23 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-var schedules = require('./schedules.json');
+const fs = require('fs');
 
 const app = express();
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 5000; //listens on localhost:5000 during development
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get('/api/hello', (req, res) => {
-  res.send({ name: 'Hello From Express' });
-});
-
-app.get('/api/all-schedules', (req, res) => {
-    res.send(schedules);
-});
-
-app.post('/api/get-schedule', (req, res) => {
-  console.log(req.body);
-  res.send(schedules[req.body.class]);
-});
-
-app.post('/api/get-schedules', (req, res) => {
-  console.log(req.body);
-  res.send(Object.keys(schedules).filter(x=>req.body.classes.includes(x)).reduce((p,n)=>{
+app.post('/api/get-schedules', (req, res) => { //api command to retrieve schedules and lectures for the given classes
+  console.log(req.body); //body format should be {classes:['className1', 'className2', ...]}
+  let rawdata = fs.readFileSync('schedules.json');
+  let schedules = JSON.parse(rawdata);
+  res.send(Object.keys(schedules) //retrieves all class keys in the schedules.json file
+  .filter(x=>req.body.classes.includes(x)) //filters on requested classes
+  .reduce((p,n)=>{ //rebuilds json object with the requested classes
     p[n] = schedules[n]; 
     return p
-  },{}));
-});
-
-app.post('/api/world', (req, res) => {
-  console.log(req.body);
-  res.send(
-    `I received your POST request. This is what you sent me: ${req.body.post}`,
-  );
+  },{})); //sends back the schedules.json file filtered for the requested classes
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
