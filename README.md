@@ -7,7 +7,7 @@ An organization and time management solution for students' schedules and lecture
 The following are required to be installed:
 
 - node.js
-- npm
+- npm (included in node.js)
 - yarn
 - concurrently
 
