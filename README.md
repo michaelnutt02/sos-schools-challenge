@@ -1,6 +1,6 @@
 ﻿# sos-schools-challenge
 
-#Prerequisites
+﻿#Prerequisites
 
 The following are required to be installed:
 
@@ -19,7 +19,7 @@ The following will be installed automatically (with npm install)
 - Body-Parser
 - React-Router-Dom
 
-#Setup
+﻿#Setup
 
 - Navigate to sos-schools-challenge in terminal or git bash
 - Type "npm install"
