@@ -4,7 +4,7 @@
 
 The following are required to be installed:
 
-- Node
+- node
 - npm
 - yarn
 - concurrently
