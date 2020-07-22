@@ -11,7 +11,7 @@ The following are required to be installed:
 - yarn
 - concurrently
 
-The following will be installed automatically (with npm install):
+The following will be installed automatically with npm install:
 
 - bootstrap
 - react
