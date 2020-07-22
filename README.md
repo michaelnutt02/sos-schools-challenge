@@ -11,13 +11,13 @@ The following are required to be installed:
 
 The following will be installed automatically (with npm install)
 
-- Bootstrap
-- React
-- React-Bootstrap
-- React-Dom
-- React-Scripts
-- Body-Parser
-- React-Router-Dom
+- bootstrap
+- react
+- react-bootstrap
+- react-dom
+- react-scripts
+- body-parser
+- react-router-dom
 
 ## Setup
 
