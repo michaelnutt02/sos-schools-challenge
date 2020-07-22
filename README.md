@@ -1,4 +1,4 @@
-﻿# sos-schools-challenge
+﻿## sos-schools-challenge
 
 # Prerequisites
 
