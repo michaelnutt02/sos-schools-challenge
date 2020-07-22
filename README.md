@@ -1,5 +1,7 @@
 ﻿# sos-schools-challenge
 
+An organization and time management solution for students' schedules and lectures.
+
 ## Prerequisites
 
 The following are required to be installed:
